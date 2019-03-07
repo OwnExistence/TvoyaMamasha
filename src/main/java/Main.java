@@ -15,6 +15,7 @@ public class Main extends ListenerAdapter {
         builder.build();
     }
 
+    //ti pidor
     @Override
     public void onMessageReceived(MessageReceivedEvent event){
         System.out.println("We received a message from " +
