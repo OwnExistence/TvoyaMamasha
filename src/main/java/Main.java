@@ -26,7 +26,7 @@ public class Main extends ListenerAdapter {
         if(event.getMessage().getContentRaw().equals("!ping")) {
             //
             //
-            event.getChannel().sendMessage("Имя твоей мамки, H@H@H@H@H@H@H@H@H@H@H@H@").queue();
+            event.getChannel().sendMessage("Здорова черти").queue();
         }
     }
 }
