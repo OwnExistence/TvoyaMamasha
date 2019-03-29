@@ -1,3 +1,4 @@
+import content.gameRPS;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -23,11 +24,13 @@ public class Main extends ListenerAdapter {
                 event.getMessage().getContentDisplay()
         );
         //==============================================================================================================
-//        if(event.getMessage().getContentRaw().equals("!ping")) {
-//            event.getChannel().sendMessage("Здорова черти").queue();
-//        }
-        if(event.getMessage().getContentRaw().equals("Ножницы")) {
+        if(event.getMessage().getContentRaw().equals("!ping")) {
             event.getChannel().sendMessage("Иди ко мне, мой сладкий. Поиграем.").queue();
+        }
+        if(event.getMessage().getContentRaw().toLowerCase().equals("ножницы") ||
+                event.getMessage().getContentRaw().toLowerCase().equals("камень") ||
+                event.getMessage().getContentRaw().toLowerCase().equals("бумага")) {
+            event.getChannel().sendMessage(gameRPS.winner(event.getMessage().getContentRaw().toLowerCase())).queue();
         }
     }
 }
