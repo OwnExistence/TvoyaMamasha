@@ -9,7 +9,7 @@ import javax.security.auth.login.LoginException;
 public class Main extends ListenerAdapter {
     public static void main(String[] args) throws LoginException {
         JDABuilder builder = new JDABuilder(AccountType.BOT);
-        String token = "NTUzMjgyNDk2NTE5ODY0MzYz.D2L0Qw.C7xTylEU4oFjRa8J-zyrkXbars4";
+        final String token = "NTUzMjgyNDk2NTE5ODY0MzYz.D2L0Qw.C7xTylEU4oFjRa8J-zyrkXbars4";
         builder.setToken(token);
         builder.addEventListeners(new Main());
         builder.build();
@@ -22,11 +22,12 @@ public class Main extends ListenerAdapter {
                 event.getAuthor().getName() + ": " +
                 event.getMessage().getContentDisplay()
         );
-        //
-        if(event.getMessage().getContentRaw().equals("!ping")) {
-            //
-            //
-            event.getChannel().sendMessage("Здорова черти").queue();
+        //==============================================================================================================
+//        if(event.getMessage().getContentRaw().equals("!ping")) {
+//            event.getChannel().sendMessage("Здорова черти").queue();
+//        }
+        if(event.getMessage().getContentRaw().equals("Ножницы")) {
+            event.getChannel().sendMessage("Иди ко мне, мой сладкий. Поиграем.").queue();
         }
     }
 }
