@@ -3,6 +3,7 @@ import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import thirdParty.mongo.WorkingWithMongo;
 //import org.w3c.dom.events.Event;
 
 import javax.security.auth.login.LoginException;
@@ -19,6 +20,7 @@ public class Main extends ListenerAdapter {
     //ti pidor
     @Override
     public void onMessageReceived(MessageReceivedEvent event){
+        WorkingWithMongo mongo = new WorkingWithMongo();
         System.out.println("We received a message from " +
                 event.getAuthor().getName() + ": " +
                 event.getMessage().getContentDisplay()
@@ -31,6 +33,13 @@ public class Main extends ListenerAdapter {
                 event.getMessage().getContentRaw().toLowerCase().equals("камень") ||
                 event.getMessage().getContentRaw().toLowerCase().equals("бумага")) {
             event.getChannel().sendMessage(gameRPS.winner(event.getMessage().getContentRaw().toLowerCase())).queue();
+        }
+        if(event.getMessage().getContentRaw().toLowerCase().equals("db")) {
+            mongo.test();
+            event.getChannel().sendMessage("Wooooooooooooooo-Hooooooooooooooooo").queue();
+        }
+        if(event.getMessage().getContentRaw().toLowerCase().contains("мамаша")) {
+            event.getChannel().sendMessage("Здравствуй, пупсик.").queue();
         }
     }
 }

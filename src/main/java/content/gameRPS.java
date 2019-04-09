@@ -7,6 +7,7 @@ public final class gameRPS {
         } else {
             return "Ты пидор, вызвал эксепшн";
         }
+
     }
 
     private static String computerChoice(){
