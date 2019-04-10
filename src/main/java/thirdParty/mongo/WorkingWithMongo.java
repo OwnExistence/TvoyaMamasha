@@ -38,6 +38,56 @@ public class WorkingWithMongo {
                 .append("info", new Document("x", 203).append("y", 102));
         collection.insertOne(doc);
     }
+
+    public String addLink(String link) {
+        MongoCollection<Document> collection = database.getCollection("link");
+        long found = collection.countDocuments(Document.parse("{\"link\":\"" +
+                link +
+                "\"}"));
+        if (found == 0) {
+            int count = (int) collection.countDocuments();
+            Document doc = new Document("id", count+1)
+                    .append("link", link);
+            collection.insertOne(doc);
+            mongoClient.close();
+            return "Done!";
+        } else {
+            mongoClient.close();
+            return "This link already exists in the list";
+        }
+
+    }
+
+    public String showLink() {
+        MongoCollection<Document> collection = database.getCollection("link");
+        String list = "";
+        long found = collection.countDocuments();
+        if(found != 0) {
+            for (Document cur : collection.find()) {
+                list += cur.get("link") + "\n";
+            }
+            mongoClient.close();
+            return list;
+        } else {
+            mongoClient.close();
+            return "Empty";
+        }
+    }
+
+    public String deleteLink(String link) {
+        MongoCollection<Document> collection = database.getCollection("link");
+        long found = collection.countDocuments(Document.parse("{\"link\":\"" +
+                link +
+                "\"}"));
+        if(found != 0) {
+            collection.deleteOne(eq("link", link));
+            mongoClient.close();
+            return "Done";
+        } else {
+            mongoClient.close();
+            return "There is no such Note";
+        }
+    }
 }
 
 //examples

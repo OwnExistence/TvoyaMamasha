@@ -22,7 +22,8 @@ public class Main extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent event){
         WorkingWithMongo mongo = new WorkingWithMongo();
         System.out.println("We received a message from " +
-                event.getAuthor().getName() + ": " +
+                event.getAuthor().getName() + "(" +
+                event.getChannel().getId() + "): " +
                 event.getMessage().getContentDisplay()
         );
         //==============================================================================================================
@@ -38,8 +39,20 @@ public class Main extends ListenerAdapter {
             mongo.test();
             event.getChannel().sendMessage("Wooooooooooooooo-Hooooooooooooooooo").queue();
         }
-        if(event.getMessage().getContentRaw().toLowerCase().contains("мамаша")) {
+        if(event.getMessage().getContentRaw().toLowerCase().contains("привет")) {
             event.getChannel().sendMessage("Здравствуй, пупсик.").queue();
+        }
+        if(event.getMessage().getContentRaw().toLowerCase().contains("/add")) {
+            String newMsg = event.getMessage().getContentRaw().replace("/add ", "");
+            event.getChannel().sendMessage(mongo.addLink(newMsg)).queue();
+        }
+        if(event.getMessage().getContentRaw().toLowerCase().equals("/show")) {
+            event.getChannel().sendMessage(mongo.showLink()).queue();
+
+        }
+        if(event.getMessage().getContentRaw().toLowerCase().contains("/delete")) {
+            String newMsg = event.getMessage().getContentRaw().replace("/delete ", "");
+            event.getChannel().sendMessage(mongo.deleteLink(newMsg)).queue();
         }
     }
 }
