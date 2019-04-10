@@ -3,6 +3,7 @@ import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import thirdParty.mongo.DiscordToMongo;
 import thirdParty.mongo.WorkingWithMongo;
 //import org.w3c.dom.events.Event;
 
@@ -21,6 +22,7 @@ public class Main extends ListenerAdapter {
     @Override
     public void onMessageReceived(MessageReceivedEvent event){
         WorkingWithMongo mongo = new WorkingWithMongo();
+        DiscordToMongo dtmongo = new DiscordToMongo();
         System.out.println("We received a message from " +
                 event.getAuthor().getName() + "(" +
                 event.getChannel().getId() + "): " +
@@ -44,15 +46,15 @@ public class Main extends ListenerAdapter {
         }
         if(event.getMessage().getContentRaw().toLowerCase().contains("/add")) {
             String newMsg = event.getMessage().getContentRaw().replace("/add ", "");
-            event.getChannel().sendMessage(mongo.addLink(newMsg)).queue();
+            event.getChannel().sendMessage(dtmongo.addLink(newMsg)).queue();
         }
         if(event.getMessage().getContentRaw().toLowerCase().equals("/show")) {
-            event.getChannel().sendMessage(mongo.showLink()).queue();
+            event.getChannel().sendMessage(dtmongo.showLink()).queue();
 
         }
         if(event.getMessage().getContentRaw().toLowerCase().contains("/delete")) {
             String newMsg = event.getMessage().getContentRaw().replace("/delete ", "");
-            event.getChannel().sendMessage(mongo.deleteLink(newMsg)).queue();
+            event.getChannel().sendMessage(dtmongo.deleteLink(newMsg)).queue();
         }
     }
 }
