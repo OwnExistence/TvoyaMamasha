@@ -20,7 +20,7 @@ public class Main extends ListenerAdapter {
 
     //ti pidor
     @Override
-    public void onMessageReceived(MessageReceivedEvent event){
+    public void onMessageReceived(MessageReceivedEvent event) {
         WorkingWithMongo mongo = new WorkingWithMongo();
         DiscordToMongo dtmongo = new DiscordToMongo();
         System.out.println("We received a message from " +
@@ -29,32 +29,35 @@ public class Main extends ListenerAdapter {
                 event.getMessage().getContentDisplay()
         );
         //==============================================================================================================
-        if(event.getMessage().getContentRaw().equals("!ping")) {
+        if (event.getMessage().getContentRaw().equals("!ping")) {
             event.getChannel().sendMessage("Иди ко мне, мой сладкий. Поиграем.").queue();
         }
-        if(event.getMessage().getContentRaw().toLowerCase().equals("ножницы") ||
+        if (event.getMessage().getContentRaw().toLowerCase().equals("ножницы") ||
                 event.getMessage().getContentRaw().toLowerCase().equals("камень") ||
                 event.getMessage().getContentRaw().toLowerCase().equals("бумага")) {
             event.getChannel().sendMessage(gameRPS.winner(event.getMessage().getContentRaw().toLowerCase())).queue();
         }
-        if(event.getMessage().getContentRaw().toLowerCase().equals("db")) {
+        if (event.getMessage().getContentRaw().toLowerCase().equals("db")) {
             mongo.test();
             event.getChannel().sendMessage("Wooooooooooooooo-Hooooooooooooooooo").queue();
         }
-        if(event.getMessage().getContentRaw().toLowerCase().contains("привет")) {
+        if (event.getMessage().getContentRaw().toLowerCase().contains("привет")) {
             event.getChannel().sendMessage("Здравствуй, пупсик.").queue();
         }
-        if(event.getMessage().getContentRaw().toLowerCase().contains("/add")) {
+        if (event.getMessage().getContentRaw().toLowerCase().contains("/add")) {
             String newMsg = event.getMessage().getContentRaw().replace("/add ", "");
             event.getChannel().sendMessage(dtmongo.addLink(newMsg)).queue();
         }
-        if(event.getMessage().getContentRaw().toLowerCase().equals("/show")) {
+        if (event.getMessage().getContentRaw().toLowerCase().equals("/show")) {
             event.getChannel().sendMessage(dtmongo.showLink()).queue();
 
         }
-        if(event.getMessage().getContentRaw().toLowerCase().contains("/delete")) {
+        if (event.getMessage().getContentRaw().toLowerCase().contains("/delete")) {
             String newMsg = event.getMessage().getContentRaw().replace("/delete ", "");
             event.getChannel().sendMessage(dtmongo.deleteLink(newMsg)).queue();
+        }
+        if (event.getMessage().getContentRaw().toLowerCase().contains("нахуй")) {
+            event.getChannel().sendMessage("https://www.youtube.com/watch?v=Vw_46nfGxNY").queue();
         }
     }
 }
