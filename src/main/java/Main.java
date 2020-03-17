@@ -50,7 +50,6 @@ public class Main extends ListenerAdapter {
         }
         if (event.getMessage().getContentRaw().toLowerCase().equals("/show")) {
             event.getChannel().sendMessage(dtmongo.showLink()).queue();
-
         }
         if (event.getMessage().getContentRaw().toLowerCase().contains("/delete")) {
             String newMsg = event.getMessage().getContentRaw().replace("/delete ", "");
@@ -59,5 +58,10 @@ public class Main extends ListenerAdapter {
         if (event.getMessage().getContentRaw().toLowerCase().contains("нахуй")) {
             event.getChannel().sendMessage("https://www.youtube.com/watch?v=Vw_46nfGxNY").queue();
         }
+        if (event.getMessage().getContentRaw().equals("!play")) {
+            event.getChannel().sendMessage("Задавай свой вопрос, я постараюсь ответить на него предельно ясно.").queue();
+        }
+
     }
 }
+//sas
